@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Funcionarios</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 80px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Palucha</h1>
+		</div>
+		<div class="panel-body">
+			<div class="panel panel-default" style="padding: 20px"	>
+				<fieldset>
+					<form class="form-inline" method="POST" th:object="${funcionario}" th:action="@{/funcionario/save}" style="margin: 20px 0">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Codigo" th:field="*{codigo}" /> 
+							<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" />
+							<input type="text" class="form-control" placeholder="e-mail" th:field="*{email}" />
+							<button type="submit" class="btn btn-primary">Adicionar</button>
+						</div>
+					</form>
+				</fieldset>
+			</div>
+			
+	
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Codigo</th>
+						<th>Nome</th>
+						<th>E-mail</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="funcionario: ${funcionarios}">
+						<td th:text="${funcionario.id}"></td>
+						<td th:text="${funcionario.codigo}"></td>
+						<td th:text="${funcionario.nome}"></td>
+						<td th:text="${funcionario.email}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

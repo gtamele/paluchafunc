@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<title>Lista de Funcionarios</title>
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	rel="stylesheet" />
+	
+	
+	<script src="/js/auxfile.js">
+	 
+	
+	
+	</script>
+	
+	
+</head>
+<body>
+	<div class="panel panel-default" style="margin: 80px">
+		<div class="panel-heading">
+			<h1 class="panel-title">Palucha</h1>
+		</div>
+		<div class="panel-body">
+		
+			<div class="panel panel-default" style="padding: 20px"	>
+				<fieldset>
+					
+						<div class="form-group" align="center" >
+							<img  src="/images/edmP1.png" />
+							<img  src="/images/fipagP.png" />
+							
+						</div>
+											
+				</fieldset>
+			</div>
+			<div align="center">
+				
+					<font color="red" > 
+												
+					<b> <span th:text="${statusMsg}"></span></b>	
+					</font>
+			
+			</div>
+			<div class="panel panel-default" style="padding: 20px"	>
+				<fieldset>
+					<form class="form-inline" method="GET" th:object="${funcionario}" th:action="@{/findfuncionario/findByIdAndEntidade}" style="margin: 20px 0">
+						<div class="form-group">
+						
+							<input type="hidden" th:field="*{nomeEntidade}"/>
+							 
+							<input type="text" class="form-control" placeholder="ID" th:field="*{id}" /> 
+							
+							&nbsp;
+							
+							 <label>Entidade</label>
+						        <label class="radio-inline">
+						            <input type="radio" name="radioEntidade" id="radioEntidadeEDM" value="EDM"
+						                   th:checked="*{nomeEntidade}"/>EDM
+						        </label>
+						        <label class="radio-inline">
+						            <input type="radio" name="radioEntidade" id="radioEntidadeFIPAG" value="FIPAG"
+						                   th:checked="*{nomeEntidade} == false"/>FIPAG
+						        </label>
+						</div>
+						
+						<div>
+							&nbsp;
+						</div>
+						<div>
+							<button type="submit" class="btn btn-primary" onclick="selectEntidade();">Pesquisar</button>
+						</div>
+					</form>
+				</fieldset>
+			</div>
+			
+	
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Codigo</th>
+						<th>Nome</th>
+						<th>Entidade</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="func: ${funcionarios}">
+						<td th:text="${func.id}"></td>
+						<td th:text="${func.codigo}"></td>
+						<td th:text="${func.nome}"></td>
+						<td th:text="${func.nomeEntidade}"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
