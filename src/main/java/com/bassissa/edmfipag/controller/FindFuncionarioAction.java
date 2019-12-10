@@ -77,19 +77,7 @@ public class FindFuncionarioAction {
 		modelAndView.addObject("funcionario", new FuncionarioVO());
 		
 		
-		/*
-		 * ExampleMatcher ignoringExampleMatcher =
-		 * ExampleMatcher.matchingAny().withMatcher("nomeEntidade",
-		 * ExampleMatcher.GenericPropertyMatchers.startsWith().contains().ignoreCase())
-		 * // .withMatcher("nomeEntidade",
-		 * ExampleMatcher.GenericPropertyMatchers.startsWith().ignoreCase())
-		 * .withIgnorePaths("codigo", "nome", "email", "id");
-		 * 
-		 * Example<FuncionarioVO> example = Example.of((func),ignoringExampleMatcher);
-		 * 
-		 * Optional<FuncionarioVO> funcionario = funcionarioDao.findOne(example);
-		 */
-		
+				
 		FuncionarioVO funcionario = funcionarioDao.findFuncioanrioByIdAndEntidade(func.getId(), func.getNomeEntidade());
 		
 		
