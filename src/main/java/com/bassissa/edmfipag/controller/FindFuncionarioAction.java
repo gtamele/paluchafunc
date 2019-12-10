@@ -21,7 +21,6 @@ import com.bassissa.edmfipag.model.FuncionarioVO;
 @Controller
 @RequestMapping("/findfuncionario")
 public class FindFuncionarioAction {
-	
 
 	@Autowired
 	FuncionarioDAO funcionarioDao;
@@ -29,85 +28,61 @@ public class FindFuncionarioAction {
 	@GetMapping("/pesquisar")
 	public ModelAndView listar() {
 
-		ModelAndView modelAndView = new ModelAndView("ListaFuncionarios2");
+		ModelAndView modelAndView = new ModelAndView("findFuncionario");
 
-	//	modelAndView.addObject("funcionarios", funcionarioDao.findAll());
 		modelAndView.addObject("funcionario", new FuncionarioVO());
 
 		return modelAndView;
 	}
-	
-	@GetMapping("/find")
+
+	@GetMapping("/findByID")
 	public ModelAndView getFuncionarioById(FuncionarioVO func) {
-		
+
 		List<FuncionarioVO> funcionarios = new ArrayList<FuncionarioVO>();
-		
-		ModelAndView modelAndView = new ModelAndView("ListaFuncionarios2");
-		
+
+		ModelAndView modelAndView = new ModelAndView("findFuncionario");
+
 		modelAndView.addObject("funcionario", new FuncionarioVO());
-		
+
 		Optional<FuncionarioVO> funcionario = funcionarioDao.findById(func.getId());
-		
-		
-		if(!funcionario.isPresent()) {
-			
-			
+
+		if (!funcionario.isPresent()) {
+
 			modelAndView.addObject("statusMsg", "Não existe o Técnico correspondente ao ID inserido");
-			
-			return  modelAndView;
+
+			return modelAndView;
 		}
-		
+
 		funcionarios.add(funcionario.get());
-		modelAndView.addObject("funcionarios",funcionarios);
-		                                      	
-		
-		return  modelAndView;
+		modelAndView.addObject("funcionarios", funcionarios);
+
+		return modelAndView;
 
 	}
-	
-	
-	
+
 	@GetMapping("/findByIdAndEntidade")
 	public ModelAndView getFuncionarioByIdAndEntidadeNAme(FuncionarioVO func) {
-		
+
 		List<FuncionarioVO> funcionarios = new ArrayList<FuncionarioVO>();
-		
-		ModelAndView modelAndView = new ModelAndView("ListaFuncionarios2");
-		
+
+		ModelAndView modelAndView = new ModelAndView("findFuncionario");
+
 		modelAndView.addObject("funcionario", new FuncionarioVO());
-		
-		
-				
+
 		FuncionarioVO funcionario = funcionarioDao.findFuncioanrioByIdAndEntidade(func.getId(), func.getNomeEntidade());
-		
-		
-		if(funcionario==null || funcionario.getCodigo()==null) {
-			
-			
+
+		if (funcionario == null || funcionario.getCodigo() == null) {
+
 			modelAndView.addObject("statusMsg", "Não existe o Técnico correspondente ao ID inserido");
-			
-			return  modelAndView;
+
+			return modelAndView;
 		}
-		
+
 		funcionarios.add(funcionario);
-		modelAndView.addObject("funcionarios",funcionarios);
-		                                      	
-		
-		return  modelAndView;
+		modelAndView.addObject("funcionarios", funcionarios);
+
+		return modelAndView;
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
